@@ -49,3 +49,6 @@ let rev list =
     | h :: t -> inner_rev (h :: reverted) t
   in inner_rev [] list
 ;;
+
+(* Problem 6 *)
+let is_palindrome list = list = rev(list) ;;
