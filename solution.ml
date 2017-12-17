@@ -41,3 +41,11 @@ let length list =
     | _ :: t -> inner_length (buf+1) t
   in inner_length 0 list
 ;;
+
+(* Problem 5 *)
+let rev list =
+  let rec inner_rev reverted = function
+    | []     -> reverted
+    | h :: t -> inner_rev (h :: reverted) t
+  in inner_rev [] list
+;;
