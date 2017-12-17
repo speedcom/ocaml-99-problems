@@ -27,3 +27,17 @@ let rec at idx = function
     | []     -> None
     | h :: t -> if idx = 1 then Some h else at (idx-1) t
   ;;
+
+(* Problem 4, without tail recursion *)
+let rec length = function
+  | []     -> 0;
+  | h :: t -> 1 + length t
+;;
+
+(* Problem 4, with tail recursion *)
+let length list =
+  let rec inner_length buf = function
+    | []     -> buf;
+    | _ :: t -> inner_length (buf+1) t
+  in inner_length 0 list
+;;
