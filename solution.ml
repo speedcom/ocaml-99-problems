@@ -67,7 +67,7 @@ let flatten list =
   in List.rev (inner_flatten [] list)
 ;;
 
-(* Problem 8, first version *)
+(* Problem 8, first version - that's wrong because it check global existence *)
 let rec find_opt p list =
   match list with
   | []       -> None
@@ -88,7 +88,11 @@ let rec compress = function
   | result           -> result
 ;;
 
-
+(* Problem 8, third version *)
+let rec compress = function
+  | (a :: (b :: _ as tl)) -> if a = b then compress tl else a :: compress tl
+  | result           -> result
+;;
 
 
 
