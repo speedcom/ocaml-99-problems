@@ -67,3 +67,30 @@ let flatten list =
   in List.rev (inner_flatten [] list)
 ;;
 
+(* Problem 8 *)
+let rec find_opt p list =
+  match list with
+  | []                -> None
+  | hd :: _ when hd = p -> Some hd
+  | _ :: tl           -> find p tl
+;;
+
+let compress list =
+  let rec inner_compress result = function
+    | []       -> result
+    | hd :: tl -> if (find_opt hd result) = None then inner_compress (hd :: result) tl else inner_compress result tl
+  in List.rev (inner_compress [] list)
+;;
+
+
+
+
+
+
+
+
+
+
+
+
+
