@@ -52,3 +52,18 @@ let rev list =
 
 (* Problem 6 *)
 let is_palindrome list = list = rev(list) ;;
+
+(* Problem 7 *)
+type 'a node =
+  | One of 'a
+  | Many of 'a node list
+;;
+
+let flatten list =
+  let rec inner_flatten result = function
+    | []            -> result
+    | One  hd :: tl -> inner_flatten (hd :: result) tl
+    | Many hd :: tl -> inner_flatten (inner_flatten result hd) tl
+  in List.rev (inner_flatten [] list)
+;;
+
