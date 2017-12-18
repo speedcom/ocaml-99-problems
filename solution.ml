@@ -67,12 +67,11 @@ let flatten list =
   in List.rev (inner_flatten [] list)
 ;;
 
-(* Problem 8 *)
+(* Problem 8, first version *)
 let rec find_opt p list =
   match list with
-  | []                -> None
-  | hd :: _ when hd = p -> Some hd
-  | _ :: tl           -> find p tl
+  | []       -> None
+  | hd :: tl -> if hd = p then Some hd else find p tl
 ;;
 
 let compress list =
@@ -83,8 +82,11 @@ let compress list =
 ;;
 
 
-
-
+(* Problem 8, second version *)
+let rec compress = function
+  | (a :: (b :: tl)) -> if a = b then compress (b :: tl) else a :: compress (b :: tl)
+  | result           -> result
+;;
 
 
 
