@@ -113,3 +113,12 @@ let replicate list times =
     inner_replicate ((multiple hd times) :: result) tl
   in List.rev (List.flatten (inner_replicate [] list))
 ;;
+
+(* Problem 16 *)
+let drop list n =
+  let rec inner_drop list m =
+    match list with
+    | []       -> []
+    | hd :: tl -> if(m == 1) then inner_drop tl n else hd :: inner_drop tl (m-1)
+  in inner_drop list n
+;;
