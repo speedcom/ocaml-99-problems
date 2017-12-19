@@ -71,7 +71,7 @@ let flatten list =
 let rec find_opt p list =
   match list with
   | []       -> None
-  | hd :: tl -> if hd = p then Some hd else find p tl
+  | hd :: tl -> if hd = p then Some hd else find_opt p tl
 ;;
 
 let compress list =
@@ -80,7 +80,6 @@ let compress list =
     | hd :: tl -> if (find_opt hd result) = None then inner_compress (hd :: result) tl else inner_compress result tl
   in List.rev (inner_compress [] list)
 ;;
-
 
 (* Problem 8, second version *)
 let rec compress = function
@@ -91,12 +90,13 @@ let rec compress = function
 (* Problem 8, third version *)
 let rec compress = function
   | (a :: (b :: _ as tl)) -> if a = b then compress tl else a :: compress tl
-  | result           -> result
+  | result                -> result
 ;;
 
-
-
-
-
-
-
+(* Problem 14 *)
+let duplicate list =
+  let rec inner_duplicate result = function
+  | []       -> result
+  | hd :: tl -> inner_duplicate (hd :: hd :: result) tl
+  in List.rev (inner_duplicate [] list)
+;;
