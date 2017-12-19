@@ -100,3 +100,16 @@ let duplicate list =
   | hd :: tl -> inner_duplicate (hd :: hd :: result) tl
   in List.rev (inner_duplicate [] list)
 ;;
+
+(* Problem 15 *)
+let replicate list times =
+  let rec inner_replicate result = function
+  | []       -> result
+  | hd :: tl ->
+    let rec multiple el = function
+      | t when t > 0 -> el :: (multiple el (t-1))
+      | _            -> []
+    in
+    inner_replicate ((multiple hd times) :: result) tl
+  in List.rev (List.flatten (inner_replicate [] list))
+;;
