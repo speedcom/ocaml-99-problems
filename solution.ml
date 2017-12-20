@@ -122,3 +122,14 @@ let drop list n =
     | hd :: tl -> if(m == 1) then inner_drop tl n else hd :: inner_drop tl (m-1)
   in inner_drop list n
 ;;
+
+(* Problem 17 *)
+let split list k =
+  let list_length = List.length list
+  in
+  let rec inner_split result n = function
+    | hd :: tl when n > 0 -> inner_split (hd :: (fst result), tl) (n-1) tl
+    | _                   -> ((List.rev (fst result)), snd result)
+  in
+  if (k > list_length) then (list,[]) else inner_split ([],[]) k list
+;;
