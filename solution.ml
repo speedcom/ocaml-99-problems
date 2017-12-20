@@ -133,3 +133,10 @@ let split list k =
   in
   if (k > list_length) then (list,[]) else inner_split ([],[]) k list
 ;;
+
+(* Problem 21 *)
+let rec insert_at el idx = function
+  | hd :: tl when idx > 0 -> hd :: insert_at el (idx-1) tl
+  | hd :: tl as l         -> el :: l
+  | _                     -> el :: []
+;;
