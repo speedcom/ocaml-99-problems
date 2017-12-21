@@ -140,3 +140,12 @@ let rec insert_at el idx = function
   | hd :: tl as l         -> el :: l
   | _                     -> el :: []
 ;;
+
+(* Problem 22 *)
+let range i j =
+  let rec inner_range a b result =
+    if (a <= b) then inner_range (a+1) b (a :: result) else result
+
+  in if(i < j) then List.rev(inner_range i j []) else inner_range j i []
+;;
+
