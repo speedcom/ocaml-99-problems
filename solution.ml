@@ -149,3 +149,15 @@ let range i j =
   in if(i < j) then List.rev(inner_range i j []) else inner_range j i []
 ;;
 
+(* Problem 24 *)
+let lotto n j =
+  let rec inner_lotto result =
+    if List.length result = n then
+      result
+    else
+      let r = Random.int j
+      in
+      if(List.mem r result) then inner_lotto result else inner_lotto (r :: result)
+  in inner_lotto []
+;;
+
