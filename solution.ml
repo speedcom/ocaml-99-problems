@@ -189,6 +189,17 @@ let split list k =
   if (k > list_length) then (list,[]) else inner_split ([],[]) k list
 ;;
 
+(* Problem 18 *)
+let slice list i k =
+  let rec inner_slice result idx = function
+    | []         -> result
+    | (hd :: tl) ->
+      if idx < i then inner_slice result (idx+1) tl
+      else if idx >= i && idx <= k then inner_slice (hd :: result) (idx+1) tl
+      else result
+  in inner_slice [] (-1) (List.rev list)
+;;
+
 (* Problem 21 *)
 let rec insert_at el idx = function
   | hd :: tl when idx > 0 -> hd :: insert_at el (idx-1) tl
