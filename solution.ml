@@ -93,6 +93,19 @@ let rec compress = function
   | result                -> result
 ;;
 
+(* Problem 9 *)
+let pack list =
+  let rec inner_pack current acc = function
+  | []                 -> []
+  | [x]                -> (x :: current) :: acc
+  | (a :: (b :: _ as tl)) ->
+    if a = b then
+      inner_pack (a :: current) acc tl
+    else
+      inner_pack [] ((a :: current) :: acc) tl
+  in List.rev (inner_pack [] [] list)
+;;
+
 (* Problem 10 *)
 let encode list =
   let rec inner_encode result l =
