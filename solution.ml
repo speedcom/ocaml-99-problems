@@ -120,6 +120,10 @@ let encode list =
   in inner_encode [] (List.rev list)
 ;;
 
+let encode list =
+  List.map (fun el -> (List.length el, List.hd el)) (pack list)
+;;
+
 (* Problem 14 *)
 let duplicate list =
   let rec inner_duplicate result = function
