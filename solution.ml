@@ -120,8 +120,18 @@ let encode list =
   in inner_encode [] (List.rev list)
 ;;
 
-let encode list =
+let encode2 list =
   List.map (fun el -> (List.length el, List.hd el)) (pack list)
+;;
+
+type 'a rle =
+  | One of 'a
+  | Many of int * 'a
+;;
+
+(* Problem 11 *)
+let encode list =
+  List.map (fun el -> if fst el = 1 then One (snd el) else Many (fst el, snd el)) (encode2 list)
 ;;
 
 (* Problem 14 *)
