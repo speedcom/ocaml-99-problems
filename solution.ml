@@ -134,6 +134,20 @@ let encode list =
   List.map (fun el -> if fst el = 1 then One (snd el) else Many (fst el, snd el)) (encode2 list)
 ;;
 
+(* Problem 12 *)
+let decode list =
+  let rec multiple el time =
+    if time > 0 then el :: multiple el (time -1)
+    else []
+  in
+  let rec inner_decode result = function
+    | []               -> result
+    | One a :: t       -> inner_decode (a :: result) t
+    | Many (c, a) :: t -> inner_decode ((multiple a c) @ result) t
+  in inner_decode [] (List.rev list)
+;;
+
+
 (* Problem 14 *)
 let duplicate list =
   let rec inner_duplicate result = function
