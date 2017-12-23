@@ -200,6 +200,15 @@ let slice list i k =
   in inner_slice [] (-1) (List.rev list)
 ;;
 
+(* Problem 20 *)
+let remove_at i list =
+  let rec inner_remove_at idx result = function
+    | []         -> result
+    | (hd :: tl) ->
+      if idx = i then tl @ result else inner_remove_at (idx+1) (hd :: result) tl
+  in inner_remove_at (-1) [] (List.rev list)
+;;
+
 (* Problem 21 *)
 let rec insert_at el idx = function
   | hd :: tl when idx > 0 -> hd :: insert_at el (idx-1) tl
