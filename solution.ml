@@ -93,6 +93,20 @@ let rec compress = function
   | result                -> result
 ;;
 
+(* Problem 10 *)
+let encode list =
+  let rec inner_encode result l =
+    match (result, l) with
+    | (_, [])                   -> result
+    | ([], (a :: tl))           -> inner_encode ((1, a) :: result) tl
+    | (((counter, el) :: rest), (a :: tl)) ->
+      if (el = a) then
+        inner_encode (((counter+1, el)) :: rest) tl
+      else
+        inner_encode ((1, a) :: result) tl
+  in inner_encode [] (List.rev list)
+;;
+
 (* Problem 14 *)
 let duplicate list =
   let rec inner_duplicate result = function
