@@ -200,12 +200,25 @@ let slice list i k =
   in inner_slice [] (-1) (List.rev list)
 ;;
 
+(* Problem 19 *)
+let rotate list n =
+  let c = if n >= 0 then n else (List.length list - (n * (-1)))
+  in
+  let rec inner_rotate idx buf result = function
+    | []       -> result @ (List.rev buf)
+    | hd :: tl ->
+      if idx > 0 then
+        inner_rotate (idx-1) (hd :: buf) tl tl
+      else
+        result @ (List.rev buf)
+  in inner_rotate c [] [] list
+;;
+
 (* Problem 20 *)
 let remove_at i list =
   let rec inner_remove_at idx result = function
     | []         -> result
-    | (hd :: tl) ->
-      if idx = i then tl @ result else inner_remove_at (idx+1) (hd :: result) tl
+    | (hd :: tl) -> if idx = i then tl @ result else inner_remove_at (idx+1) (hd :: result) tl
   in inner_remove_at (-1) [] (List.rev list)
 ;;
 
