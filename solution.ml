@@ -204,13 +204,15 @@ let slice list i k =
 let rotate list n =
   let c = if n >= 0 then n else (List.length list - (n * (-1)))
   in
+  let merge result buf = result @ (List.rev buf)
+  in
   let rec inner_rotate idx buf result = function
-    | []       -> result @ (List.rev buf)
+    | []       -> merge result buf
     | hd :: tl ->
       if idx > 0 then
         inner_rotate (idx-1) (hd :: buf) tl tl
       else
-        result @ (List.rev buf)
+        merge result buf
   in inner_rotate c [] [] list
 ;;
 
@@ -248,4 +250,18 @@ let lotto n j =
       if(List.mem r result) then inner_lotto result else inner_lotto (r :: result)
   in inner_lotto []
 ;;
+
+(* Problem 25 *)
+let permutation list =
+  let rec inner_permutation result = function
+    | []       -> result
+    | hd :: tl ->
+      if Random.bool() then
+        inner_permutation (hd :: result) tl
+      else
+        inner_permutation result (tl @ [hd])
+  in inner_permutation [] list
+;;
+
+
 
