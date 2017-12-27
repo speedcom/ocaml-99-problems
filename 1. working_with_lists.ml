@@ -263,5 +263,12 @@ let permutation list =
   in inner_permutation [] list
 ;;
 
-
+(* helper method *)
+let rec take list n =
+  if n <= 0 then []
+  else match list with
+    | [] -> []
+    | hd :: tl ->
+      hd :: (take tl (n-1))
+;;
 
